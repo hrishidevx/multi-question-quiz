@@ -1,0 +1,89 @@
+.auth-page {
+  width: min(100%, 560px);
+  margin: 48px auto;
+  padding: clamp(24px, 5vw, 42px);
+  border: 1px solid #dfe1d9;
+  border-radius: 7px;
+  background: #fff;
+  box-shadow: 0 14px 40px rgb(31 42 38 / 5%);
+}
+
+.auth-page > h2 {
+  margin: 0 0 28px;
+  color: #202b28;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.auth-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-page form h2,
+.auth-page form > div {
+  margin: 0;
+  color: #46534c;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.auth-page input {
+  display: block;
+  width: 100%;
+  min-height: 46px;
+  margin-top: 7px;
+  padding: 0 13px;
+  border: 1px solid #d7dcd3;
+  border-radius: 4px;
+  background: #fbfcf9;
+  color: #202b28;
+}
+
+.auth-page input::placeholder {
+  color: #9aa39b;
+}
+
+.auth-page button {
+  min-height: 46px;
+  padding: 0 18px;
+  border: 1px solid #202b28;
+  border-radius: 4px;
+  background: #202b28;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.auth-page button:hover {
+  transform: translateY(-1px);
+  background: #34443d;
+}
+
+.auth-page > button {
+  width: 100%;
+  margin-top: 12px;
+  border-color: #dfe1d9;
+  background: #f4f5ef;
+  color: #35423b;
+}
+
+.auth-page > button:hover {
+  background: #e9ece3;
+}
+
+.student-auth form h2 b {
+  color: #d45e3e;
+}
+
+.signup-auth form > div {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}

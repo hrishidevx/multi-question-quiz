@@ -1,0 +1,107 @@
+.question-container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 64px 0;
+}
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 28px 0 30px;
+  border-bottom: 1px solid #dfe1d9;
+  color: #202b28;
+  text-align: left;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.55rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.question strong:first-child {
+  color: #d45e3e;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.option span {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 18px;
+}
+.option-select {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 62px;
+  padding: 14px 18px;
+  border: 1px solid #dfe1d9;
+  border-radius: 5px;
+  background: #fff;
+  color: #35423b;
+  cursor: pointer;
+  line-height: 1.5;
+  transition:
+    border-color 150ms ease,
+    background 150ms ease;
+}
+.option-select:has(input:checked) {
+  border-color: #899a6d;
+  background: #f0f3e7;
+}
+.option-select input {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  margin: 0;
+  accent-color: #697d4b;
+}
+.navigate-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 28px 0 0;
+}
+
+.navigate-button button {
+  min-width: 124px;
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: 5px;
+  border: none;
+  background: #202b28;
+  color: #fff;
+  font-size: 0.94rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+}
+.navigate-button button:hover {
+  transform: translateY(-1px);
+  background: #34443d;
+}
+.navigate-button button:first-of-type:nth-last-child(2) {
+  border: 1px solid #dfe1d9;
+  background: transparent;
+  color: #35423b;
+}
+.navigate-button button:first-of-type:nth-last-child(2):hover {
+  background: #eff0ea;
+}
+
+@media (max-width: 600px) {
+  .question-container {
+    padding: 38px 0;
+  }
+  .question {
+    font-size: 1.3rem;
+  }
+  .navigate-button button {
+    min-width: 0;
+    flex: 1;
+  }
+}

@@ -1,0 +1,49 @@
+.Quiz {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 70px 0;
+}
+.Quiz h1 {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+.quiz-intro {
+  margin: 0 0 18px;
+  color: #65716a;
+}
+.computer,
+.math {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 116px;
+  padding: 24px 28px;
+  border: 1px solid #dfe1d9;
+  border-radius: 6px;
+  background: #fff;
+  color: #202b28;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
+}
+.computer::after,
+.math::after {
+  content: "->";
+  color: #d45e3e;
+  font-family: "DM Sans", sans-serif;
+  font-size: 1.5rem;
+}
+.computer:hover,
+.math:hover {
+  transform: translateX(4px);
+  border-color: #aab49f;
+}

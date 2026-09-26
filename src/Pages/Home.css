@@ -1,0 +1,113 @@
+.container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(240px, 0.6fr);
+  align-items: center;
+  gap: clamp(32px, 7vw, 88px);
+  max-width: 980px;
+  min-height: 590px;
+  margin: 0 auto;
+  padding: 58px 0;
+  color: #202b28;
+}
+.about,
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.about {
+  gap: 20px;
+}
+.eyebrow {
+  color: #d45e3e;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+.about h1 {
+  max-width: 650px;
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  line-height: 1.02;
+  font-weight: 600;
+}
+.about p {
+  max-width: 550px;
+  margin: 0;
+  color: #65716a;
+  font-size: 1.04rem;
+  line-height: 1.8;
+}
+.feature {
+  gap: 15px;
+  padding: 30px;
+  border: 1px solid #dce0d5;
+  border-radius: 8px;
+  background: #f0f2e9;
+  transform: rotate(1deg);
+}
+.feature-number {
+  display: grid;
+  width: 42px;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  background: #d9ed85;
+  color: #34422d;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+}
+.feature h2 {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.45rem;
+  line-height: 1.25;
+}
+.feature p {
+  margin: 0;
+  color: #65716a;
+  line-height: 1.65;
+}
+.quiz {
+  display: inline-flex;
+  grid-column: 1;
+  justify-self: start;
+  align-items: center;
+  gap: 18px;
+  margin-top: -90px;
+  padding: 16px 21px;
+  border-radius: 5px;
+  background: #202b28;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+}
+.quiz::after {
+  content: "->";
+  color: #d9ed85;
+  font-size: 1.2rem;
+}
+.quiz:hover {
+  transform: translateY(-2px);
+  background: #34443d;
+}
+
+@media (max-width: 700px) {
+  .container {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    gap: 36px;
+    padding: 64px 0 32px;
+  }
+  .feature {
+    max-width: 420px;
+  }
+  .quiz {
+    grid-column: 1;
+    margin-top: 0;
+  }
+}
