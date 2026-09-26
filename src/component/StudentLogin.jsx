@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { LoginSchema } from "../services/ZodSchema";
+import { apiRequest } from "../services/api";
 import "./Auth.css";
 
 function StudentLogin() {
@@ -10,7 +11,7 @@ function StudentLogin() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(LoginSchema),
     defaultValues: { username: "", password: "" },
@@ -18,28 +19,22 @@ function StudentLogin() {
   const onSubmit = async (data) => {
     // e.preventdefault();
     try {
-      const res = await fetch(
-        "https://playground.nileslabs.com/api/v1/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Playground-Identity": "df9ee9b9-52a7-4e7c-a325-de21989d0a85",
-          },
-          body: JSON.stringify({ ...data }),
-        },
-      );
+      const res = await apiRequest("/auth/login", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
       const response = await res.json();
-      console.log(response);
-      if (!response.error) {
-        localStorage.setItem("token", response.access_token || "");
-        window.dispatchEvent(new Event("authchange"));
-        Navigate("/Quiz");
-      } else {
-        alert(response?.error || "something went wrong");
+      const accessToken = response.access_token || response.data?.access_token;
+      if (!res.ok || response.error || !accessToken) {
+        throw new Error(
+          response?.error || "Unable to sign in. Please try again.",
+        );
       }
+      localStorage.setItem("token", accessToken);
+      window.dispatchEvent(new Event("authchange"));
+      Navigate("/Quiz");
     } catch (e) {
-      console.log(e);
+      alert(e.message || "Unable to sign in. Please try again.");
     }
   };
   const handleSignup = () => {
@@ -49,7 +44,7 @@ function StudentLogin() {
   return (
     <div className="auth-page student-auth">
       <h2>Student Login</h2>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <h2>
           Username <b>:</b>{" "}
           <input
@@ -71,7 +66,12 @@ function StudentLogin() {
           {errors.password ? errors.password.message : null}
         </h2>
 
-        <button onClick={handleSubmit(onSubmit)}>Submit</button>
+        <button className="auth-submit" type="submit" disabled={isSubmitting}>
+          {isSubmitting && (
+            <span className="button-spinner" aria-hidden="true" />
+          )}
+          {isSubmitting ? "Signing in..." : "Submit"}
+        </button>
       </form>
       <button onClick={handleSignup}>Sign Up</button>
     </div>

@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { SignupSchema } from "../services/ZodSchema";
 import { useNavigate } from "react-router";
+import { apiRequest } from "../services/api";
 import "./Auth.css";
 
 function Signup() {
@@ -9,7 +10,7 @@ function Signup() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(SignupSchema),
     defaultValues: { name: [], username: [], email: [], password: [] },
@@ -17,24 +18,19 @@ function Signup() {
   const onSubmit = async (data) => {
     // e.preventdefault();
     try {
-      const response = await fetch(
-        "https://playground.nileslabs.com/api/v1/auth/register",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...data }),
-        },
-      );
+      const response = await apiRequest("/auth/register", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
       const res = await response.json();
-      console.log(res);
-      if (!res.error) {
+      if (response.ok && !res.error) {
         // localStorage.setItem("token", res.access_token || "");
         Navigate("/Login");
       } else {
-        alert(res?.error || "Something went wrong");
+        alert(res?.error || "Unable to create your account. Please try again.");
       }
     } catch (e) {
-      console.log(e);
+      alert(e.message || "Unable to create your account. Please try again.");
     }
   };
 
@@ -88,7 +84,12 @@ function Signup() {
           />
           {errors.confirmPassword ? errors.confirmPassword.message : null}
         </div>
-        <button type="submit">Signup</button>
+        <button className="auth-submit" type="submit" disabled={isSubmitting}>
+          {isSubmitting && (
+            <span className="button-spinner" aria-hidden="true" />
+          )}
+          {isSubmitting ? "Creating account..." : "Signup"}
+        </button>
       </form>
     </div>
   );

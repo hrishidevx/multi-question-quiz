@@ -7,6 +7,7 @@ import Quiz from "./Pages/Quiz";
 import Question from "./Pages/Question";
 import Result from "./Pages/Result";
 import Protected from "./component/Protected";
+import GuestOnly from "./component/GuestOnly";
 import StudentLogin from "./component/StudentLogin";
 import Signup from "./component/Signup";
 
@@ -24,7 +25,9 @@ function App() {
     <div>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route element={<GuestOnly />}>
+          <Route path="/" element={<Home />} />
+        </Route>
         <Route path="/Login" element={<StudentLogin />} />
         <Route path="/StudentLogin" element={<StudentLogin />} />
         <Route path="/Signup" element={<Signup />} />
