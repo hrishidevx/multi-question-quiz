@@ -33,6 +33,7 @@ function StudentLogin() {
       console.log(response);
       if (!response.error) {
         localStorage.setItem("token", response.access_token || "");
+        window.dispatchEvent(new Event("authchange"));
         Navigate("/Quiz");
       } else {
         alert(response?.error || "something went wrong");
